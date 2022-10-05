@@ -65,3 +65,12 @@ Common
 Lil Supa
 ```
 [Hip Hop Spotify Playlist](https://open.spotify.com/playlist/4vKftyhS1gQovakehVcq1u?si=a7a119382dfe40da)
+
+### Tasks
+
+- Monday to Friday:
+Complete all responsive styles with native CSS.
+- Weekend:
+Learn more about routes and pinia.
+- Final week:
+Work on project logic.

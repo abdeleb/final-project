@@ -33,4 +33,13 @@ onMounted(async () => {
   </div>
 </template>
 
-<style></style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+</style>

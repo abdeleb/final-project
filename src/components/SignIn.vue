@@ -4,36 +4,38 @@
     <img src="../assets/ilustration.png" alt="">
   </div>
   <div class="signup-section">
-      <div class="title">Hello! Welcome back.</div>
-      <!-- <PersonalRouter :route="route" :buttonText="buttonText" /> -->
-      <p class="loginText">Log in with your data that you entered during your registration.</p>
-      <p v-if="errorMsg" class="">
-        {{ errorMsg }}
-      </p>
-      <form @submit.prevent="signIn">
-        <div class="signin-form">
-          <label class="" for="">Email address</label>
-          <input class="" type="email" placeholder="example@email.com" v-model="email" id="email" />
-        </div>
-        <div class="mb-4">
-          <label class="" for="">Password</label>
-      
-          <div class="">
-            <input class="" :type="passwordFieldType" onpaste="return false" placeholder="Enter password" v-model="password"
-              id="password" />
-            <span class="">
-              <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" />
-            </span>
-          </div>
-        </div>
-      
-        <button class="" type="submit">Sign In</button>
-        <p class="">
-          <span class="">Don’t have an account? </span>
-      
-          <PersonalRouter :route="route" :buttonText="buttonText" />
+      <div class="form-container">
+        <div class="title">Hello! Welcome back.</div>
+        <!-- <PersonalRouter :route="route" :buttonText="buttonText" /> -->
+        <p class="loginText">Log in with your data that you entered during your registration.</p>
+        <p v-if="errorMsg">
+          {{ errorMsg }}
         </p>
-      </form>
+        <form @submit.prevent="signIn">
+          <div class="signup-form">
+            <label for="">Email address</label>
+            <input type="email" placeholder="example@email.com" v-model="email" id="email" />
+          </div>
+          <div class="mb-4">
+            <label for="">Password</label>
+        
+            <div>
+              <input :type="passwordFieldType" onpaste="return false" placeholder="Enter password" v-model="password"
+                id="password" />
+              <span>
+                <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" />
+              </span>
+            </div>
+          </div>
+        
+          <button class="btn" type="submit">Start now!</button>
+          <p class="signup-route">
+            <span>Don’t have an account? </span>
+        
+            <PersonalRouter :route="route" :buttonText="buttonText" />
+          </p>
+        </form>
+      </div>
   </div>
 </main>
 </template>
@@ -108,43 +110,67 @@ main {
 .signup-section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 50%;
   height: 100%;
+}
+
+.form-container {
+  width: 75%;
 }
 
 .title {
   font-size: 2rem;
   font-family: 'Open sans';
   font-weight: 500;
+  margin: 1.5rem 0;
 }
 
 .loginText {
   font-size: 1.2rem;
   font-weight: 300;
+  margin-bottom: 2.5rem;
 }
 
-.signin-form {
+.signup-form {
   display: flex;
   flex-direction: column;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 0;
+input {
+  margin: 0.8rem 0 2rem 0;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 5px;
+  width: 100%;
 }
-.input {
-  color: black;
-  margin-bottom: 1rem;
+
+::placeholder {
+  color: rgb(219, 219, 219);
+  opacity: 1;
 }
-.button {
-  background-color: #4caf50; /* Green */
-  border: none;
+
+.btn {
+  background-color: #009DFF;
   color: white;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  width: 100%;
+  border-radius: 6px;
+  padding: 0.8rem 0;
+}
+
+.signup-route {
+  margin-top: 0.6rem;
+  color: rgb(113, 112, 112);
+}
+
+@media screen and (max-width: 769px) {
+  .ilustration-section {
+    display: none;
+  }
+
+  .form-container {
+    width: 100%;
+  }
 }
 </style>

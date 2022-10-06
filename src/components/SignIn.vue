@@ -3,7 +3,7 @@
   <div class="ilustration-section">
     <img src="../assets/ilustration.png" alt="">
   </div>
-  <div class="signup-section">
+  <div class="signin-section">
       <div class="form-container">
         <div class="title">Hello! Welcome back. 👋</div>
         <!-- <PersonalRouter :route="route" :buttonText="buttonText" /> -->
@@ -12,26 +12,23 @@
           {{ errorMsg }}
         </p>
         <form @submit.prevent="signIn">
-          <div class="signup-form">
+          <div class="signin-form">
             <label for="">Email address</label>
             <input type="email" placeholder="example@email.com" v-model="email" id="email" />
           </div>
-          <div class="mb-4">
+          <div>
             <label for="">Password</label>
-        
             <div>
               <input :type="passwordFieldType" onpaste="return false" placeholder="Enter password" v-model="password"
                 id="password" />
-              <span>
+              <!-- <span>
                 <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" />
-              </span>
+              </span> -->
             </div>
           </div>
-        
           <button class="btn" type="submit">Start now!</button>
           <p class="signup-route">
             <span>Don’t have an account? </span>
-        
             <PersonalRouter class="routeBtn" :route="route" :buttonText="buttonText" />
           </p>
         </form>
@@ -107,7 +104,7 @@ main {
   width: 90%;
 }
 
-.signup-section {
+.signin-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,7 +130,7 @@ main {
   margin-bottom: 2.5rem;
 }
 
-.signup-form {
+.signin-form {
   display: flex;
   flex-direction: column;
 }
@@ -174,7 +171,7 @@ input {
     display: none;
   }
 
-  .signup-section {
+  .signin-section {
     width: 75%;
   }
 

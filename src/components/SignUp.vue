@@ -1,45 +1,35 @@
 <template>
-  <div>Sign Up</div>
-  <PersonalRouter :route="route" :buttonText="buttonText" />
-  <p>Good Music, Patience and a lot effort</p>
-  <p>Keep calm and code on!</p>
-
-  <form @submit.prevent="signUp">
-    <div class="">
-      <label class="" for="">Email</label>
-      <input
-        class=""
-        type="email"
-        placeholder="dave@wuTangfinancial.com"
-        v-model="email"
-        id="email"
-      />
+  <main>
+    <div class="ilustration-section">
+      <img src="../assets/signup-ilustration.svg" alt="">
     </div>
-    <div class="">
-      <label class="" for="">Password</label>
-      <input
-        class=""
-        type="password"
-        placeholder="************"
-        v-model="password"
-        id="password"
-      />
+    <div class="signup-section">
+      <div class="form-container">
+        <div class="title">Sign Up</div>
+        <p class="subtitle">Register to be able to enjoy all the benefits of our application!</p>
+        
+        <form @submit.prevent="signUp">
+          <div>
+            <label>Email</label>
+            <input type="email" placeholder="example@email.com" v-model="email" id="email" />
+          </div>
+          <div>
+            <label>Password</label>
+            <input type="password" placeholder="Enter password" v-model="password" id="password" />
+          </div>
+          <div>
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm password" v-model="confirmPassword" id="confirmPassword" />
+          </div>
+          <button class="btn" type="submit">Sign Up</button>
+          <p>
+            <span>Have an account? </span>
+            <PersonalRouter class="routeBtn" :route="route" :buttonText="buttonText" />
+          </p>
+        </form>
+      </div>
     </div>
-    <div class="">
-      <label class="" for="">Confirm Password</label>
-      <input
-        class=""
-        type="password"
-        placeholder="************"
-        v-model="confirmPassword"
-        id="confirmPassword"
-      />
-    </div>
-    <button class="" type="submit">Sign Up</button>
-    <p class="">
-      <span class="">Have an account? </span>
-    </p>
-  </form>
+  </main>
 </template>
 
 <script setup>
@@ -49,7 +39,7 @@ import PersonalRouter from "./PersonalRouter.vue";
 import { useUserStore } from "../stores/user";
 // Route Variables
 const route = "/auth/login";
-const buttonText = "Test the Sign In Route";
+const buttonText = "Sign in";
 // Input Fields
 const email = ref(null);
 const password = ref(null);
@@ -82,4 +72,86 @@ async function signUp() {
 }
 </script>
 
-<style></style>
+<style scoped>
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.ilustration-section {
+  width: 50%;
+  height: 100%;
+  background-color: #009DFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ilustration-section img {
+  width: 60%;
+}
+.signup-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+.form-container {
+  width: 75%;
+}
+.title {
+  font-size: 2rem;
+  font-family: 'Open sans';
+  font-weight: 500;
+  margin: 1.5rem 0;
+}
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+
+input {
+  margin: 0.8rem 0 2rem 0;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 5px;
+  width: 100%;
+}
+
+::placeholder {
+  color: rgb(219, 219, 219);
+  opacity: 1;
+}
+
+.btn {
+  background-color: #009DFF;
+  color: white;
+  width: 100%;
+  border-radius: 6px;
+  padding: 0.8rem 0;
+}
+p {
+  margin-top: 0.6rem;
+}
+p span {
+  color: rgb(113, 112, 112);
+}
+.routeBtn {
+  color: #009DFF;
+  font-weight: 500;
+}
+@media screen and (max-width: 769px) {
+  .ilustration-section {
+    display: none;
+  }
+  .signup-section {
+    width: 75%;
+  }
+  .form-container {
+    width: 100%;
+  }
+}
+</style>

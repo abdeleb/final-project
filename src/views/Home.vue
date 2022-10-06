@@ -1,15 +1,66 @@
 <template>
-  <NavVue />
-  <div>hello</div>
-  <FooterVue />
+  <Nav />
+  <main>
+    <div class="main-header">
+      <div class="header-container">
+        <img src="../assets/logo-app.png" alt="">
+        <h1>Welcome to Task Manager</h1>
+        <h2>This tool will help you organize your tasks easily and simply.</h2>
+        <p>Add a new task here 👇</p>
+        <NewTask />
+      </div>
+    </div>
+  </main>
+  <Footer />
 </template>
 
 <script setup>
-import NavVue from '../components/Nav.vue';
-import FooterVue from '../components/Footer.vue';
+import Nav from '../components/Nav.vue';
+import Footer from '../components/Footer.vue';
+import NewTask from '../components/NewTask.vue';
 </script>
 
-<style></style>
+<style>
+main {
+    background-color: white;
+    width: 100%;
+    height: 100vh;
+  }
+
+.main-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.header-container {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.header-container img {
+  width: 75px;
+}
+
+.header-container h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(89, 89, 89);
+}
+
+.header-container h2 {
+  font-weight: 300;
+}
+
+.header-container p {
+  margin-top: 18px;
+}
+</style>
 
 <!-- 
 **Hints**

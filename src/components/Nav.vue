@@ -1,8 +1,8 @@
 <template>
   <header>
-    <img src="../assets/logo-app.png" alt="logo">
+    <img src="../assets/logo.png" alt="logo">
     <a href="/">
-    <img src="../assets/logout.png" alt="logout logo">
+    <img src="../assets/logout-icon.png" alt="logout logo">
     </a>
   </header>
 </template>
@@ -25,22 +25,22 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-color: white;
+  background-color: #009DFF;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 header img {
-  margin: 6px;
+  margin: 8px;
 }
 
 header img {
-  width: 3rem;
-  height: 3rem;
+  width: 2.6rem;
+  height: 2.6rem;
 }
 
 a img {
-  width: 1.8rem;
-  height: 1.8rem;
-  margin-right: 1.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 8px;
 }
 </style>

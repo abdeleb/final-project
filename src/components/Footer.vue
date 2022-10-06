@@ -1,7 +1,19 @@
 <template>
-  <div>Footer Component</div>
+  <footer>
+    <p>Designed with 💚 by <a href="https://abdeleb.me/"><strong>Abdel Eb</strong></a></p>
+  </footer>
 </template>
 
-<script setup></script>
-
-<style></style>
+<style scoped>
+footer {
+  display: grid;
+  justify-content: center;
+}
+p, strong {
+    font-size: .8rem;
+    font-weight: 300;
+}
+strong {
+  text-decoration-line: underline;
+}
+</style>

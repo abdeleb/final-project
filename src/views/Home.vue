@@ -1,10 +1,12 @@
 <template>
   <NavVue />
   <div>hello</div>
+  <FooterVue />
 </template>
 
 <script setup>
 import NavVue from '../components/Nav.vue';
+import FooterVue from '../components/Footer.vue';
 </script>
 
 <style></style>

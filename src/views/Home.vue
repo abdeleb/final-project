@@ -10,6 +10,7 @@
         <NewTask />
       </div>
     </div>
+    <TaskItem />
   </main>
   <Footer />
 </template>
@@ -18,9 +19,11 @@
 import Nav from '../components/Nav.vue';
 import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
+import TaskItemVue from '../components/TaskItem.vue';
+import TaskItem from '../components/TaskItem.vue';
 </script>
 
-<style>
+<style scoped>
 main {
     background-color: white;
     width: 100%;

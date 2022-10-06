@@ -1,5 +1,21 @@
 <template>
-  <div>Task Item Component</div>
+  <div class="task-container">
+      <div class="task">
+        <div class="task-header">
+          <a href="/">
+            <img src="../assets/edit-icon.png" alt="">
+          </a>
+          <h4>Title</h4>
+          <a href="">
+            <img src="../assets/close-icon.png" alt="">
+          </a>
+        </div>
+        <div class="task-body">
+          <p>Description:</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis animi exercitationem temporibus quod. Illum libero rem magni nihil quo culpa perferendis minus reiciendis officiis harum. Quas quae sint vero commodi?</p>
+        </div>
+      </div>
+  </div>
 </template>
 
 <script setup>
@@ -10,7 +26,48 @@
 // const props = defineProps(["ENTER-PROP-HERE"]);
 </script>
 
-<style></style>
+<style scoped>
+
+.task-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
+.task {
+  width: 250px;
+  height: 250px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin: 24px;
+}
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+  background-color: #009DFF;
+}
+.task-header h4 {
+  margin: 6px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.task-header a img {
+  width: 12px;
+  height: 12px;
+  margin: 6px;
+}
+
+.task-body {
+  border-radius: 0 0 6px 6px;
+}
+
+.task-body p {
+  font-size: .8rem;
+  margin: 10px;
+}
+</style>
 
 <!-- 
 **Hints**

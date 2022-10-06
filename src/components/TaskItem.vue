@@ -3,11 +3,11 @@
       <div class="task">
         <div class="task-header">
           <a href="/">
-            <img src="../assets/edit-icon.png" alt="">
+            <img src="../assets/icons/edit-icon.png" alt="">
           </a>
           <h4>Title</h4>
           <a href="">
-            <img src="../assets/close-icon.png" alt="">
+            <img src="../assets/icons/close-icon.png" alt="">
           </a>
         </div>
         <div class="task-body">

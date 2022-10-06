@@ -2,7 +2,7 @@
   <header>
     <img src="../assets/logo.png" alt="logo">
     <a href="/">
-    <img src="../assets/logout-icon.png" alt="logout logo">
+    <img src="../assets/icons/logout-icon.png" alt="logout logo">
     </a>
   </header>
 </template>

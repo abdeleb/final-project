@@ -1,8 +1,11 @@
 <template>
+  <NavVue />
   <div>hello</div>
 </template>
 
-<script setup></script>
+<script setup>
+import NavVue from '../components/Nav.vue';
+</script>
 
 <style></style>
 

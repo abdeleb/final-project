@@ -5,7 +5,7 @@
   </div>
   <div class="signup-section">
       <div class="form-container">
-        <div class="title">Hello! Welcome back.</div>
+        <div class="title">Hello! Welcome back. 👋</div>
         <!-- <PersonalRouter :route="route" :buttonText="buttonText" /> -->
         <p class="loginText">Log in with your data that you entered during your registration.</p>
         <p v-if="errorMsg">
@@ -32,7 +32,7 @@
           <p class="signup-route">
             <span>Don’t have an account? </span>
         
-            <PersonalRouter :route="route" :buttonText="buttonText" />
+            <PersonalRouter class="routeBtn" :route="route" :buttonText="buttonText" />
           </p>
         </form>
       </div>
@@ -50,7 +50,7 @@ import { storeToRefs } from "pinia";
 
 // Route Variables
 const route = "/auth/sign-up";
-const buttonText = "Test the Sign Up Route";
+const buttonText = "Sign Up";
 
 // Input Fields
 const email = ref("");
@@ -86,7 +86,7 @@ const signIn = async () => {
 };
 </script>
 
-<style>
+<style scoped>
 main {
   display: flex;
   justify-content: center;
@@ -164,9 +164,18 @@ input {
   color: rgb(113, 112, 112);
 }
 
+.routeBtn {
+  color: #009DFF;
+  font-weight: 500;
+}
+
 @media screen and (max-width: 769px) {
   .ilustration-section {
     display: none;
+  }
+
+  .signup-section {
+    width: 75%;
   }
 
   .form-container {

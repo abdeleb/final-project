@@ -28,7 +28,7 @@
 
 <style scoped>
 form {
-  width: 100%;
+  width: 600px;
   margin: 24px 0;
   border-radius: 12px;
   padding: 30px;
@@ -65,5 +65,14 @@ button {
   background-color: #009DFF;
   padding: 10px;
   width: 100%;
+}
+
+@media screen and (max-width: 769px) {
+  form {
+    width: 100%;
+  }
+  div label {
+    font-size: .8rem;
+  }
 }
 </style>

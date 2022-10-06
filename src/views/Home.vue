@@ -39,8 +39,9 @@ main {
   margin-top: 16px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 80%;
 }
 
 .header-container img {
@@ -48,7 +49,7 @@ main {
 }
 
 .header-container h1 {
-  font-size: 3rem;
+  font-size: 2.6rem;
   font-weight: bold;
   color: rgb(89, 89, 89);
 }
@@ -59,6 +60,34 @@ main {
 
 .header-container p {
   margin-top: 18px;
+}
+
+@media screen and (max-width: 769px) {
+  .header-container h1 {
+      font-size: 1.6rem;
+    }
+  
+    .header-container h2 {
+      font-size: 0.8rem;
+    }
+  
+    .header-container p {
+      font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 460px) {
+  .header-container h1 {
+    font-size: 1.2rem;
+  }
+
+  .header-container h2 {
+    font-size: 0.6rem;
+  }
+
+  .header-container p {
+    font-size: 0.6rem;
+  }
 }
 </style>
 

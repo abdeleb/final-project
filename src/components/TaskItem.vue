@@ -12,7 +12,7 @@
         </div>
         <div class="task-body">
           <p>Description:</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis animi exercitationem temporibus quod. Illum libero rem magni nihil quo culpa perferendis minus reiciendis officiis harum. Quas quae sint vero commodi?</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis animi exercitationem?</p>
         </div>
       </div>
   </div>
@@ -27,7 +27,6 @@
 </script>
 
 <style scoped>
-
 .task-container {
   display: flex;
   justify-content: center;
@@ -36,9 +35,10 @@
 }
 .task {
   width: 250px;
-  height: 250px;
+  height: 200px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   margin: 24px;
+  border-radius: 0 0 8px 8px;
 }
 .task-header {
   display: flex;
@@ -58,11 +58,6 @@
   height: 12px;
   margin: 6px;
 }
-
-.task-body {
-  border-radius: 0 0 6px 6px;
-}
-
 .task-body p {
   font-size: .8rem;
   margin: 10px;

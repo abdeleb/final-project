@@ -10,7 +10,9 @@
         <NewTask />
       </div>
     </div>
-    <TaskItem />
+    <div class="main-task">
+      <TaskItem />
+    </div>
   </main>
   <Footer />
 </template>

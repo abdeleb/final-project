@@ -8,7 +8,8 @@
 footer {
   display: grid;
   justify-content: center;
-  margin: 22px;
+  align-content: center;
+  margin: 24px;
 }
 p, strong {
     font-size: .8rem;

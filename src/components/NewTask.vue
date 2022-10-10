@@ -14,7 +14,7 @@
   <textarea 
     class="description-input" 
     placeholder="Description" 
-    rows="5"
+    rows="2"
     v-model="taskDesc"    
   ></textarea>
 </div>
@@ -62,7 +62,7 @@ function uploadTask() {
 
 <style scoped>
 form {
-  width: 50%;
+  width: 60%;
   margin: 24px 0;
   border-radius: 12px;
   padding: 30px;

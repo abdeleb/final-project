@@ -1,40 +1,56 @@
 <template>
-<main>
-  <div class="ilustration-section">
-    <img src="../assets/ilustration.png" alt="">
-  </div>
-  <div class="signin-section">
+  <main>
+    <div class="ilustration-section">
+      <img src="../assets/ilustration.png" alt="" />
+    </div>
+    <div class="signin-section">
       <div class="form-container">
         <div class="title">Hello! Welcome back. 👋</div>
         <!-- <PersonalRouter :route="route" :buttonText="buttonText" /> -->
-        <p class="loginText">Log in with your data that you entered during your registration.</p>
+        <p class="loginText">
+          Log in with your data that you entered during your registration.
+        </p>
         <p v-if="errorMsg">
           {{ errorMsg }}
         </p>
         <form @submit.prevent="signIn">
           <div class="signin-form">
             <label for="">Email address</label>
-            <input type="email" placeholder="example@email.com" v-model="email" id="email" />
+            <input
+              type="email"
+              placeholder="example@email.com"
+              v-model="email"
+              id="email"
+            />
           </div>
           <div>
             <label for="">Password</label>
             <div>
-              <input :type="passwordFieldType" onpaste="return false" placeholder="Enter password" v-model="password"
-                id="password" />
-              <!-- <span>
-                <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" />
-              </span> -->
+              <input
+                :type="passwordFieldType"
+                onpaste="return false"
+                placeholder="Enter password"
+                v-model="password"
+                id="password"
+              />
+              <span>
+                <!-- <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" /> -->
+              </span>
             </div>
           </div>
           <button class="btn" type="submit">Start now!</button>
           <p class="signup-route">
             <span>Don’t have an account? </span>
-            <PersonalRouter class="routeBtn" :route="route" :buttonText="buttonText" />
+            <PersonalRouter
+              class="routeBtn"
+              :route="route"
+              :buttonText="buttonText"
+            />
           </p>
         </form>
       </div>
-  </div>
-</main>
+    </div>
+  </main>
 </template>
 
 <script setup>
@@ -69,9 +85,17 @@ const redirect = useRouter();
 const signIn = async () => {
   try {
     // calls the user store and send the users info to backend to logIn
-    await useUserStore().signIn(email.value, password.value);
-    // redirects user to the homeView
-    redirect.push({ path: "/" });
+    if (email.value != "" && password.value != "") {
+      await useUserStore().signIn(email.value, password.value);
+      // redirects user to the homeView
+      redirect.push({ path: "/" });
+    } else {
+      errorMsg.value = "Please, complete the fcking form";
+      // hides error message
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 5000);
+    }
   } catch (error) {
     // displays error message
     errorMsg.value = `Error: ${error.message}`;
@@ -94,13 +118,13 @@ main {
 .ilustration-section {
   width: 50%;
   height: 100%;
-  background-color: #009DFF;
+  background-color: #009dff;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.ilustration-section img{
+.ilustration-section img {
   width: 90%;
 }
 
@@ -119,7 +143,7 @@ main {
 
 .title {
   font-size: 2rem;
-  font-family: 'Open sans';
+  font-family: "Open sans";
   font-weight: 500;
   margin: 1.5rem 0;
 }
@@ -149,7 +173,7 @@ input {
 }
 
 .btn {
-  background-color: #009DFF;
+  background-color: #009dff;
   color: white;
   width: 100%;
   border-radius: 6px;
@@ -162,7 +186,7 @@ input {
 }
 
 .routeBtn {
-  color: #009DFF;
+  color: #009dff;
   font-weight: 500;
 }
 

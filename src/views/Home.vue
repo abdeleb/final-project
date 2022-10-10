@@ -1,16 +1,32 @@
 <template>
   <Nav />
   <main>
-    <div class="main-header">
-      <div class="header-container">
-        <img src="../assets/logo-app.png" alt="">
-        <h1>Welcome to Task Manager</h1>
-        <h2>This tool will help you organize your tasks easily and simply.</h2>
-        <p>Add a new task here 👇</p>
-        <NewTask />
+    <div class="newtask-container">
+        <div class="newtask">
+          <div class="newtask-text">
+            <img src="../assets/logo-app.png" alt="">
+            <h1>Welcome to Task Manager</h1>
+            <h2>This tool will help you organize your tasks easily and simply.</h2>
+          </div>
+          <NewTask />
+        </div>
+    </div>
+    <div class="todo-container">
+      <div class="todo-container-child">
+        <h1>To Do</h1>
+        <div class="todo">
+          <TaskItem />
+        </div>
       </div>
     </div>
-    <TaskItem />
+    <div class="done-container">
+      <div class="done-container-child">
+        <h1>Done</h1>
+        <div class="done">
+          <TaskItem />
+        </div>
+      </div>
+    </div>
   </main>
   <Footer />
 </template>
@@ -28,70 +44,71 @@ main {
     background-color: white;
     width: 100%;
     height: 100vh;
-  }
-
-.main-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.newtask,
+.newtask-text,
+.todo-container,
+.todo-container-child,
+.done-container,
+.done-container-child {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.newtask-container, .todo-container, .done-container {
+  width: 30%;
 }
 
-.header-container {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
+.newtask-text {
+  width: 90%;
 }
 
-.header-container img {
+img {
   width: 75px;
+  margin-bottom: 12px;
 }
 
-.header-container h1 {
-  font-size: 2.6rem;
+.newtask-text h1 {
+  font-size: 1.2rem;
   font-weight: bold;
-  color: rgb(89, 89, 89);
+  margin-bottom: 12px;
 }
 
-.header-container h2 {
-  font-weight: 300;
+/* --- To Do & Done --- */
+
+.todo-container h1, .done-container h1 {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 12px 0;
 }
 
-.header-container p {
-  margin-top: 18px;
+.todo-container-child, .done-container-child {
+  background-color: #009DFF;
+  border-radius: 8px;
+  width: 90%;
 }
 
-@media screen and (max-width: 769px) {
-  .header-container h1 {
-      font-size: 1.6rem;
-    }
-  
-    .header-container h2 {
-      font-size: 0.8rem;
-    }
-  
-    .header-container p {
-      font-size: 0.8rem;
-    }
+.done-container-child {
+  background-color: rgb(46, 213, 49);
 }
 
-@media screen and (max-width: 460px) {
-  .header-container h1 {
-    font-size: 1.2rem;
-  }
-
-  .header-container h2 {
-    font-size: 0.6rem;
-  }
-
-  .header-container p {
-    font-size: 0.6rem;
-  }
+.todo, .done {
+  background-color: white;
+  width: 95%;
+  height: 100%;
+  margin-bottom: 8px;
 }
+
+
+
+
+/* @media screen and (max-width: 769px) {
+} */
 </style>
 
 <!-- 

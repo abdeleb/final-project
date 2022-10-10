@@ -18,7 +18,7 @@
     v-model="taskDesc"    
   ></textarea>
 </div>
-<button @click.prevent="uploadTask" >Add task</button>
+<button @click.prevent="uploadTask">Add task</button>
 </form>
 </template>
   
@@ -26,13 +26,17 @@
 import { ref } from 'vue';
 import { supabase } from '../supabase';
 import { useTaskStore } from '../stores/task';
-  
-const emit = defineEmits(["childNewTask"]);
 
 let taskTitle = ref("");
 let taskDesc = ref("");
 let errorBool = ref(false);
 const emptyString = ref("");
+
+const taskStore = useTaskStore();
+
+async function sendToStore(title, description) {
+  await taskStore.addTask(title, description);
+}
 
 function uploadTask() {
   if (taskTitle.value === "") {
@@ -42,10 +46,10 @@ function uploadTask() {
       errorBool.value = false;
     }, 1000);
   } else {
-    emit("childNewTask", taskTitle.value, taskDesc.value);
+    sendToStore(taskTitle.value, taskDesc.value);
     taskTitle.value = "";
     taskDesc.value = "";
-    console.log(taskTitle.value);
+    //console.log(taskTitle.value);
   }
 };
 // constant to save a variable that define the custom event that will be emitted to the homeView
@@ -58,7 +62,7 @@ function uploadTask() {
 
 <style scoped>
 form {
-  width: 600px;
+  width: 90%;
   margin: 24px 0;
   border-radius: 12px;
   padding: 30px;

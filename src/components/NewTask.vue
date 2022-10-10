@@ -62,7 +62,7 @@ function uploadTask() {
 
 <style scoped>
 form {
-  width: 90%;
+  width: 50%;
   margin: 24px 0;
   border-radius: 12px;
   padding: 30px;

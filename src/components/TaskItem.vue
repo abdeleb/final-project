@@ -1,25 +1,22 @@
 <template>
   <div class="task-container">
       <div class="task">
-        <div class="task-header">
-          <a href="/">
-            <img src="../assets/icons/edit-icon.png" alt="">
-          </a>
-          <h4>Title</h4>
-          <a href="">
-            <img @click="deleteTask" src="../assets/icons/close-icon.png" alt="">
-          </a>
+        <div class="task-header" :style="cmpFn">
+          <img src="../assets/icons/edit-icon.png" alt="">
+          <h4>{{ taskData.title }}</h4>
+          <img @click="deleteTask" src="../assets/icons/close-icon.png" alt="">
         </div>
         <div class="task-body">
-          <p>{{ taskData.title }}</p>
+          <p><strong>Description:</strong></p>
           <p>{{ taskData.description }}</p>
         </div>
+        <button class="btn" :style="cmpFn" @click="completedTask = !completedTask">Complete task</button>
       </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useTaskStore } from "../stores/task.js";
 
 const props = defineProps(["taskData"]);
@@ -29,11 +26,22 @@ let myID = props.taskData.id;
 
 async function deleteTask() {
   myID = props.taskData.id;
-  if (confirm("Are you sure you want to delete task id " + myID + "?")) {
+  if (confirm(`Are you sure you want to delete task ID ${myID}?`)) {
     await taskStore.deleteSpecificTask(myID);
     emit("updateTasksAgain");
   }
 }
+
+const completedTask = ref(false);
+
+const defaultBgColor = "background: #009DFF";
+const colorGreen = "background: #02DA47";
+
+const cmpFn = computed(() => {
+  // console.log(completedTask.value);
+  return completedTask.value === false ? defaultBgColor : colorGreen;
+});
+
 
 // const props = defineProps(["ENTER-PROP-HERE"]);
 </script>
@@ -57,7 +65,6 @@ async function deleteTask() {
   justify-content: space-between;
   align-items: center;
   border-radius: 8px 8px 0 0;
-  background-color: #009DFF;
 }
 .task-header h4 {
   margin: 6px;
@@ -65,14 +72,29 @@ async function deleteTask() {
   font-size: 1rem;
   font-weight: bold;
 }
-.task-header a img {
+.task-header img {
   width: 12px;
   height: 12px;
   margin: 6px;
+  cursor: pointer;
+}
+
+.task-body p strong {
+  font-size: 0.9rem;
 }
 .task-body p {
   font-size: .8rem;
   margin: 10px;
+}
+
+.btn {
+  border-radius: 8px;
+  background-color: #009dff;
+  margin: 70px auto 0 auto;
+  padding: 4px 8px;
+  color: white;
+  font-size: .8rem;
+  cursor: pointer;
 }
 </style>
 

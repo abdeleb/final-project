@@ -6,10 +6,10 @@
 
 <style scoped>
 footer {
-  display: grid;
+  display: flex;
   justify-content: center;
-  align-content: center;
-  margin: 24px;
+  align-items: center;
+  height: 100px;
 }
 p, strong {
     font-size: .8rem;

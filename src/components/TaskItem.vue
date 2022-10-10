@@ -7,21 +7,33 @@
           </a>
           <h4>Title</h4>
           <a href="">
-            <img src="../assets/icons/close-icon.png" alt="">
+            <img @click="deleteTask" src="../assets/icons/close-icon.png" alt="">
           </a>
         </div>
         <div class="task-body">
-          <p>Description:</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis animi exercitationem?</p>
+          <p>{{ taskData.title }}</p>
+          <p>{{ taskData.description }}</p>
         </div>
       </div>
   </div>
 </template>
 
 <script setup>
-// const emit = defineEmits([
-//   ENTER-EMITS-HERE
-// ])
+import { ref } from "vue";
+import { useTaskStore } from "../stores/task.js";
+
+const props = defineProps(["taskData"]);
+const taskStore = useTaskStore();
+
+let myID = props.taskData.id;
+
+async function deleteTask() {
+  myID = props.taskData.id;
+  if (confirm("Are you sure you want to delete task id " + myID + "?")) {
+    await taskStore.deleteSpecificTask(myID);
+    emit("updateTasksAgain");
+  }
+}
 
 // const props = defineProps(["ENTER-PROP-HERE"]);
 </script>

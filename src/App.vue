@@ -1,4 +1,6 @@
 <script setup>
+import Nav from '../src/components/Nav.vue';
+import Footer from '../src/components/Footer.vue';
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
@@ -28,9 +30,11 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Nav />
   <div>
     <router-view />
   </div>
+  <Footer />
 </template>
 
 <style>

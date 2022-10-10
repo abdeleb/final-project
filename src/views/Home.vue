@@ -1,5 +1,4 @@
 <template>
-  <Nav />
   <main>
     <div class="main-header">
       <div class="header-container">
@@ -11,25 +10,46 @@
       </div>
     </div>
     <div class="main-task">
-      <TaskItem />
+      <TaskItem
+        v-for="(task, index) in taskArray"
+        :key="index"
+        :taskData="task"
+      />
     </div>
   </main>
-  <Footer />
 </template>
 
 <script setup>
-import Nav from '../components/Nav.vue';
-import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
 import TaskItemVue from '../components/TaskItem.vue';
 import TaskItem from '../components/TaskItem.vue';
+import { useTaskStore } from "../stores/task.js";
+import { ref } from 'vue';
+
+const taskStore = useTaskStore();
+
+let taskArray = ref([]);
+let todoTaskArray = ref([]);
+let doneTaskArray = ref([]);
+
+async function readFromStore() {
+  taskArray.value = await taskStore.fetchTasks();
+  todoTaskArray.value = taskArray.value.filter(
+    (element) => element.is_complete === false
+  );
+  doneTaskArray.value = taskArray.value.filter(
+    (element) => element.is_complete === true
+  );
+}
+readFromStore();
+
 </script>
 
 <style scoped>
 main {
   background-color: white;
   width: 100%;
-  height: 100vh;
+  
 }
 
 .main-header {
@@ -65,6 +85,13 @@ main {
 
 .header-container p {
   margin-top: 18px;
+}
+
+.main-task {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 }
 
 @media screen and (max-width: 769px) {

@@ -15,7 +15,6 @@ export const useTaskStore = defineStore("tasks", {
       this.tasks = tasks;
       return this.tasks;
     },
-    // New code
     async addTask(title, description) {
       console.log(title, description);
       const { data, error } = await supabase.from("tasks").insert([
@@ -26,6 +25,12 @@ export const useTaskStore = defineStore("tasks", {
           description: description,
         },
       ]);
+    },
+    async deleteSpecificTask(id) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .delete()
+        .eq("id", id);
     },
   },
 });

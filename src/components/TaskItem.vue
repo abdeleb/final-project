@@ -2,18 +2,39 @@
   <div class="task-container">
       <div class="task">
         <div class="task-header" :style="completedTaskFn">
-          <img @click="editMode = !editMode" src="../assets/icons/edit-icon.png" alt="">
+          <img 
+            @click="editMode = !editMode" 
+            src="../assets/icons/edit-icon.png" 
+            alt=""
+          >
           <h4 v-if="editMode === false">{{ taskData.title }}</h4>
-          <input v-else class="input-editTitle" type="text" placeholder="New title">
-          <img @click="deleteTask" src="../assets/icons/close-icon.png" alt="">
+          <input v-else class="input-editTitle" v-model="title" type="text" placeholder="New title">
+          <img 
+            @click="deleteTask" 
+            src="../assets/icons/close-icon.png" 
+            alt=""
+          >
         </div>
         <div class="task-body">
           <p><strong>Description:</strong></p>
           <p v-if="editMode === false">{{ taskData.description }}</p>
-          <input v-else class="input-editDesc" type="text" placeholder="New description">
+          <input 
+            v-else class="input-editDesc" 
+            v-model="description" 
+            type="text" 
+            placeholder="New description"
+          >
         </div>
-        <button v-if="editMode === false" class="btn" :style="completedTaskFn" @click="completedTask = !completedTask">Complete task</button>
-        <button v-else @click="editMode = !editMode" class="btn">Save changes</button>
+        <button 
+          v-if="editMode === false" 
+          class="btn" 
+          :style="completedTaskFn" 
+          @click="completedTask = !completedTask"
+        >Complete task</button>
+        <button 
+          v-else @click="saveEditedTask()" 
+          class="btn"
+        >Save changes</button>
       </div>
   </div>
 </template>
@@ -21,6 +42,8 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useTaskStore } from "../stores/task.js";
+
+const emit = defineEmits(["fetchTasks"]);
 
 const props = defineProps(["taskData"]);
 const taskStore = useTaskStore();
@@ -45,10 +68,23 @@ const completedTaskFn = computed(() => {
   return completedTask.value === false ? defaultBgColor : colorGreen;
 });
 
+/* --- EDIT MODE --- */
+
+const title = ref(props.taskData.title);
+const description = ref(props.taskData.description);
+
 const editMode = ref(false);
 
-
-// const props = defineProps(["ENTER-PROP-HERE"]);
+async function saveEditedTask() {
+  myID = props.taskData.id;
+  editMode.value = false;
+  await taskStore.editTask(
+    myID,
+    title.value,
+    description.value
+  );
+  emit('fetchTasks');
+}
 </script>
 
 <style scoped>

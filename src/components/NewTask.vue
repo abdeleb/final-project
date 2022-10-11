@@ -18,7 +18,7 @@
     v-model="taskDesc"    
   ></textarea>
 </div>
-<button @click.prevent="uploadTask">Add task</button>
+<button @click="uploadTask">Add task</button>
 </form>
 </template>
   
@@ -26,6 +26,8 @@
 import { ref } from 'vue';
 import { supabase } from '../supabase';
 import { useTaskStore } from '../stores/task';
+
+const emit = defineEmits(["fetchTasks"]);
 
 let taskTitle = ref("");
 let taskDesc = ref("");
@@ -50,7 +52,9 @@ function uploadTask() {
     taskTitle.value = "";
     taskDesc.value = "";
     //console.log(taskTitle.value);
+    emit('fetchTasks');
   }
+
 };
 // constant to save a variable that define the custom event that will be emitted to the homeView
 // constant to save a variable that holds the value of the title input field of the new task

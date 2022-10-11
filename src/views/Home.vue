@@ -7,7 +7,9 @@
         <h1>Welcome to Task Manager</h1>
         <h2>This tool will help you organize your tasks easily and simply.</h2>
         <p>Add a new task here 👇</p>
-        <NewTask />
+        <NewTask
+          @fetchTasks="readFromStore"
+        />
       </div>
     </div>
     <div class="main-task">
@@ -15,6 +17,7 @@
         v-for="(task, index) in taskArray"
         :key="index"
         :taskData="task"
+        @fetchTasks="readFromStore"
       />
     </div>
   </main>

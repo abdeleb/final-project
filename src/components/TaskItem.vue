@@ -2,15 +2,18 @@
   <div class="task-container">
       <div class="task">
         <div class="task-header" :style="cmpFn">
-          <img src="../assets/icons/edit-icon.png" alt="">
-          <h4>{{ taskData.title }}</h4>
+          <img @click="editMode = !editMode" src="../assets/icons/edit-icon.png" alt="">
+          <h4 v-if="editMode === false">{{ taskData.title }}</h4>
+          <input v-else class="input-editTitle" type="text" placeholder="New title">
           <img @click="deleteTask" src="../assets/icons/close-icon.png" alt="">
         </div>
         <div class="task-body">
           <p><strong>Description:</strong></p>
-          <p>{{ taskData.description }}</p>
+          <p v-if="editMode === false">{{ taskData.description }}</p>
+          <input v-else class="input-editDesc" type="text" placeholder="New description">
         </div>
-        <button class="btn" :style="cmpFn" @click="completedTask = !completedTask">Complete task</button>
+        <button v-if="editMode === false" class="btn" :style="cmpFn" @click="completedTask = !completedTask">Complete task</button>
+        <button v-else @click="editMode = !editMode" class="btn">Save changes</button>
       </div>
   </div>
 </template>
@@ -28,7 +31,7 @@ async function deleteTask() {
   myID = props.taskData.id;
   if (confirm(`Are you sure you want to delete task ID ${myID}?`)) {
     await taskStore.deleteSpecificTask(myID);
-    emit("updateTasksAgain");
+    // emit("updateTasksAgain");
   }
 }
 
@@ -39,8 +42,11 @@ const colorGreen = "background: #02DA47";
 
 const cmpFn = computed(() => {
   // console.log(completedTask.value);
+  console.log(props.taskData.is_complete);
   return completedTask.value === false ? defaultBgColor : colorGreen;
 });
+
+const editMode = ref(false);
 
 
 // const props = defineProps(["ENTER-PROP-HERE"]);
@@ -95,6 +101,21 @@ const cmpFn = computed(() => {
   color: white;
   font-size: .8rem;
   cursor: pointer;
+}
+
+.input-editTitle {
+  background-color: white;
+  width: 60%;
+  padding: 0 6px;
+  border-radius: 8px;
+}
+
+.input-editDesc {
+  background: #f2f2f2;
+  margin: 12px;
+  width: 90%;
+  padding: 0 6px;
+  border-radius: 8px;
 }
 </style>
 

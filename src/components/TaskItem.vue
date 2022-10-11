@@ -136,7 +136,6 @@ async function saveEditedTask() {
   font-size: .8rem;
   cursor: pointer;
 }
-
 .input-editTitle {
   background-color: white;
   width: 60%;

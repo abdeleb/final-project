@@ -96,6 +96,11 @@ button {
   background-color: #009DFF;
   padding: 10px;
   width: 100%;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0288f6;
 }
 
 @media screen and (max-width: 769px) {

@@ -62,7 +62,7 @@ const completedTask = ref(false);
 
 const defaultBgColor = "background: #009DFF";
 const colorGreen = "background: #02DA47";
-const changeColor = computed(() => completedTask.value === false ? defaultBgColor : colorGreen);
+const changeColor = computed(() => props.taskData.is_complete === false ? defaultBgColor : colorGreen);
 
 const completedTaskFn = async () => {
   myID = props.taskData.id;

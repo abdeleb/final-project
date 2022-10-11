@@ -45,13 +45,17 @@ header img {
 }
 
 header img {
-  width: 2rem;
-  height: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .logout {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
   margin-right: 8px;
+}
+.logout:hover {
+  width: 1.6rem;
+  height: 1.6rem;
 }
 </style>

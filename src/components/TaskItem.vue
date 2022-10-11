@@ -8,7 +8,7 @@
             alt=""
           >
           <h4 v-if="editMode === false">{{ taskData.title }}</h4>
-          <input v-else class="input-editTitle" v-model="title" type="text" placeholder="New title">
+          <input v-else class="input-editTitle" v-model="taskData.title" type="text" placeholder="New title">
           <img 
             @click="deleteTask" 
             src="../assets/icons/close-icon.png" 
@@ -20,7 +20,7 @@
           <p v-if="editMode === false">{{ taskData.description }}</p>
           <input 
             v-else class="input-editDesc" 
-            v-model="description" 
+            v-model="taskData.description" 
             type="text" 
             placeholder="New description"
           >
@@ -69,10 +69,6 @@ const completedTaskFn = computed(() => {
 });
 
 /* --- EDIT MODE --- */
-
-const title = ref(props.taskData.title);
-const description = ref(props.taskData.description);
-
 const editMode = ref(false);
 
 async function saveEditedTask() {
@@ -80,8 +76,8 @@ async function saveEditedTask() {
   editMode.value = false;
   await taskStore.editTask(
     myID,
-    title.value,
-    description.value
+    props.taskData.title,
+    props.taskData.description
   );
   emit('fetchTasks');
 }

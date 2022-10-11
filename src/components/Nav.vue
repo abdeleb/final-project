@@ -17,7 +17,6 @@ const router = useRouter();
 const signOut = async () => {
   try {
     let { error } = await supabase.auth.signOut();
-    console.log("Test");
     if (error) throw error;
   } catch (error) {
     alert(error.message);
@@ -46,13 +45,13 @@ header img {
 }
 
 header img {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .logout {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.2rem;
+  height: 1.2rem;
   margin-right: 8px;
 }
 </style>

@@ -1,30 +1,29 @@
 <template>
-  <Nav />
-  <main>
-    <div class="main-header">
-      <div class="header-container">
-        <img src="../assets/logo-app.png" alt="">
-        <h1>Welcome to Task Manager</h1>
-        <h2>This tool will help you organize your tasks easily and simply.</h2>
-        <p>Add a new task here 👇</p>
-        <NewTask
-          @fetchTasks="readFromStore"
-        />
+  <div v-if="splashScreen">
+    <SplashScreen />
+  </div>
+  <div v-else>
+    <Nav />
+    <main>
+      <div class="main-header">
+        <div class="header-container">
+          <img src="../assets/logo-app.png" alt="">
+          <h1>Welcome to Task Manager</h1>
+          <h2>This tool will help you organize your tasks easily and simply.</h2>
+          <p>Add a new task here 👇</p>
+          <NewTask @fetchTasks="readFromStore" />
+        </div>
       </div>
-    </div>
-    <div class="main-task">
-      <TaskItem
-        v-for="(task, index) in taskArray"
-        :key="index"
-        :taskData="task"
-        @fetchTasks="readFromStore"
-      />
-    </div>
-  </main>
-  <Footer />
+      <div class="main-task">
+        <TaskItem v-for="(task, index) in taskArray" :key="index" :taskData="task" @fetchTasks="readFromStore" />
+      </div>
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script setup>
+import SplashScreen from "../components/SplashScreen.vue";
 import Nav from "../components/Nav.vue";
 import Footer from "../components/Footer.vue";
 import NewTask from '../components/NewTask.vue';
@@ -36,12 +35,17 @@ import { ref } from 'vue';
 const taskStore = useTaskStore();
 
 let taskArray = ref([]);
-// let doneTaskArray = ref([]);
 
 async function readFromStore() {
   taskArray.value = await taskStore.fetchTasks();
 }
 readFromStore();
+
+const splashScreen = ref(true);
+const splashScreenFn = () => {
+  setTimeout(() => splashScreen.value = false, 3000);
+};
+splashScreenFn();
 
 </script>
 

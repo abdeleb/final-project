@@ -84,22 +84,17 @@ const redirect = useRouter();
 // Arrow function to Signin user to supaBase
 const signIn = async () => {
   try {
-    // calls the user store and send the users info to backend to logIn
     if (email.value != "" && password.value != "") {
       await useUserStore().signIn(email.value, password.value);
-      // redirects user to the homeView
       redirect.push({ path: "/" });
     } else {
-      errorMsg.value = "Please, complete the fcking form";
-      // hides error message
+      errorMsg.value = "Please, complete the form.";
       setTimeout(() => {
         errorMsg.value = null;
       }, 5000);
     }
   } catch (error) {
-    // displays error message
     errorMsg.value = `Error: ${error.message}`;
-    // hides error message
     setTimeout(() => {
       errorMsg.value = null;
     }, 5000);

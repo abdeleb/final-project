@@ -54,6 +54,10 @@ header img {
   height: 1.4rem;
   margin-right: 8px;
 }
+header img:hover {
+  width: 2.6rem;
+  height: 2.6rem;
+}
 .logout:hover {
   width: 1.6rem;
   height: 1.6rem;

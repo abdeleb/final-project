@@ -1,7 +1,7 @@
 <template>
   <div class="task-container">
       <div class="task">
-        <div class="task-header" :style="cmpFn">
+        <div class="task-header" :style="completedTaskFn">
           <img @click="editMode = !editMode" src="../assets/icons/edit-icon.png" alt="">
           <h4 v-if="editMode === false">{{ taskData.title }}</h4>
           <input v-else class="input-editTitle" type="text" placeholder="New title">
@@ -12,7 +12,7 @@
           <p v-if="editMode === false">{{ taskData.description }}</p>
           <input v-else class="input-editDesc" type="text" placeholder="New description">
         </div>
-        <button v-if="editMode === false" class="btn" :style="cmpFn" @click="completedTask = !completedTask">Complete task</button>
+        <button v-if="editMode === false" class="btn" :style="completedTaskFn" @click="completedTask = !completedTask">Complete task</button>
         <button v-else @click="editMode = !editMode" class="btn">Save changes</button>
       </div>
   </div>
@@ -40,9 +40,8 @@ const completedTask = ref(false);
 const defaultBgColor = "background: #009DFF";
 const colorGreen = "background: #02DA47";
 
-const cmpFn = computed(() => {
-  // console.log(completedTask.value);
-  console.log(props.taskData.is_complete);
+const completedTaskFn = computed(() => {
+  //console.log(props.taskData.is_complete);
   return completedTask.value === false ? defaultBgColor : colorGreen;
 });
 

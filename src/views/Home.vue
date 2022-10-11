@@ -1,4 +1,5 @@
 <template>
+  <Nav />
   <main>
     <div class="main-header">
       <div class="header-container">
@@ -17,9 +18,12 @@
       />
     </div>
   </main>
+  <Footer />
 </template>
 
 <script setup>
+import Nav from "../components/Nav.vue";
+import Footer from "../components/Footer.vue";
 import NewTask from '../components/NewTask.vue';
 import TaskItemVue from '../components/TaskItem.vue';
 import TaskItem from '../components/TaskItem.vue';
@@ -29,17 +33,10 @@ import { ref } from 'vue';
 const taskStore = useTaskStore();
 
 let taskArray = ref([]);
-let todoTaskArray = ref([]);
-let doneTaskArray = ref([]);
+// let doneTaskArray = ref([]);
 
 async function readFromStore() {
   taskArray.value = await taskStore.fetchTasks();
-  todoTaskArray.value = taskArray.value.filter(
-    (element) => element.is_complete === false
-  );
-  doneTaskArray.value = taskArray.value.filter(
-    (element) => element.is_complete === true
-  );
 }
 readFromStore();
 

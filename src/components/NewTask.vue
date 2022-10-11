@@ -18,7 +18,10 @@
     v-model="taskDesc"    
   ></textarea>
 </div>
-<button @click="uploadTask">Add task</button>
+<p v-if="errorMsg" :style="'color: red'">
+  {{ errorMsg }}
+</p>
+<button @click.prevent="uploadTask">Add task</button>
 </form>
 </template>
   
@@ -31,8 +34,7 @@ const emit = defineEmits(["fetchTasks"]);
 
 let taskTitle = ref("");
 let taskDesc = ref("");
-let errorBool = ref(false);
-const emptyString = ref("");
+const errorMsg = ref("");
 
 const taskStore = useTaskStore();
 
@@ -41,27 +43,18 @@ async function sendToStore(title, description) {
 }
 
 function uploadTask() {
-  if (taskTitle.value === "") {
-    errorBool.value = true;
-    emptyString.value = "Title is required.";
+  if (taskTitle.value === "" || taskDesc.value === "") {
+    errorMsg.value = "Title and description is required.";
     setTimeout(() => {
-      errorBool.value = false;
-    }, 1000);
+      errorMsg.value = false;
+    }, 2500);
   } else {
     sendToStore(taskTitle.value, taskDesc.value);
     taskTitle.value = "";
     taskDesc.value = "";
-    //console.log(taskTitle.value);
     emit('fetchTasks');
   }
-
 };
-// constant to save a variable that define the custom event that will be emitted to the homeView
-// constant to save a variable that holds the value of the title input field of the new task
-// constant to save a variable that holds the value of the description input field of the new task
-// constant to save a variable that holds an initial false boolean value for the errorMessage container that is conditionally displayed depending if the input field is empty
-// const constant to save a variable that holds the value of the error message
-// arrow function to call the form holding the task title and task description that uses a conditional to first checks if the task title is empty, if true the error message is displayed through the errorMessage container and sets a timeOut method that hides the error after some time. Else, its emmits a custom event to the home view with the task title and task description; clears the task title and task description input fields.
 </script>
 
 <style scoped>

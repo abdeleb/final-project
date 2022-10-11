@@ -1,7 +1,7 @@
 <template>
   <div class="task-container">
       <div class="task">
-        <div class="task-header" :style="completedTaskFn">
+        <div class="task-header" :style="changeColor">
           <img 
             @click="editMode = !editMode" 
             src="../assets/icons/edit-icon.png" 
@@ -28,8 +28,8 @@
         <button 
           v-if="editMode === false" 
           class="btn" 
-          :style="completedTaskFn" 
-          @click="completedTask = !completedTask"
+          :style="changeColor" 
+          @click="completedTaskFn"
         >Complete task</button>
         <button 
           v-else @click="saveEditedTask()" 
@@ -54,7 +54,7 @@ async function deleteTask() {
   myID = props.taskData.id;
   if (confirm(`Are you sure you want to delete task ID ${myID}?`)) {
     await taskStore.deleteSpecificTask(myID);
-    // emit("updateTasksAgain");
+    emit('fetchTasks');
   }
 }
 
@@ -62,11 +62,14 @@ const completedTask = ref(false);
 
 const defaultBgColor = "background: #009DFF";
 const colorGreen = "background: #02DA47";
+const changeColor = computed(() => completedTask.value === false ? defaultBgColor : colorGreen);
 
-const completedTaskFn = computed(() => {
-  //console.log(props.taskData.is_complete);
-  return completedTask.value === false ? defaultBgColor : colorGreen;
-});
+const completedTaskFn = async () => {
+  myID = props.taskData.id;
+  completedTask.value = !completedTask.value;
+  await taskStore.completeTask(myID, completedTask.value);
+  emit('fetchTasks');
+}
 
 /* --- EDIT MODE --- */
 const editMode = ref(false);

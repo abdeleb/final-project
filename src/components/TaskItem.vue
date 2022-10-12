@@ -44,6 +44,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useTaskStore } from "../stores/task.js";
+import swal from "sweetalert";
 
 const emit = defineEmits(["fetchTasks"]);
 
@@ -160,19 +161,12 @@ img:hover {
   padding: 0 6px;
   border-radius: 8px;
 }
-
 .input-editDesc {
   background: #f2f2f2;
   margin: 12px;
   width: 90%;
   padding: 0 6px;
   border-radius: 8px;
-}
-
-@media screen and (max-width: 480px) {
-  .task {
-    width: 30px;
-  }
 }
 </style>
 

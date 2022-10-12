@@ -39,12 +39,6 @@ async function readFromStore() {
   taskArray.value = await taskStore.fetchTasks();
 }
 readFromStore();
-
-const splashScreen = ref(true);
-const splashScreenFn = () => {
-  setTimeout(() => (splashScreen.value = false), 0);
-};
-splashScreenFn();
 </script>
 
 <style scoped>

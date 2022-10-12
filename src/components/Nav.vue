@@ -70,7 +70,7 @@ header img {
 
 .welcome-text {
   position: absolute;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: white;
   right: 45px;
 }

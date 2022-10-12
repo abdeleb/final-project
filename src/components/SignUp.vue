@@ -161,6 +161,10 @@ input {
   border-radius: 6px;
   padding: 0.8rem 0;
 }
+.btn:hover {
+  background: #0288f6;
+  cursor: pointer;
+}
 p {
   margin-top: 0.6rem;
 }

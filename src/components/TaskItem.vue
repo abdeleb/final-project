@@ -44,7 +44,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useTaskStore } from "../stores/task.js";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const emit = defineEmits(["fetchTasks"]);
 
@@ -53,13 +53,34 @@ const taskStore = useTaskStore();
 
 let myID = props.taskData.id;
 
-async function deleteTask() {
+// async function deleteTask() {
+//   myID = props.taskData.id;
+//   if (confirm(`Are you sure you want to delete task ID ${myID}?`)) {
+//     await taskStore.deleteSpecificTask(myID);
+//     emit("fetchTasks");
+//   }
+// }
+
+const asyncDeleteTask = async () => {
   myID = props.taskData.id;
-  if (confirm(`Are you sure you want to delete task ID ${myID}?`)) {
-    await taskStore.deleteSpecificTask(myID);
-    emit("fetchTasks");
-  }
-}
+  await taskStore.deleteSpecificTask(myID);
+  emit("fetchTasks");
+};
+
+const deleteTask = () => {
+  Swal.fire({
+    title: "Are you sure you want to delete this task?",
+    showCancelButton: true,
+    cancelButtonText: "Cancel",
+    confirmButtonText: "Confirm",
+    icon: "warning",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      asyncDeleteTask();
+      Swal.fire("Poof!", "Your task has been deleted!", "success");
+    }
+  });
+};
 
 const completedTask = ref(false);
 

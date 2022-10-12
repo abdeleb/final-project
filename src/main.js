@@ -5,6 +5,7 @@ import App from "./App.vue";
 import router from "./router";
 
 import "./assets/styles/reset.css";
+import Swal from "sweetalert2";
 // import "./assets/styles/base.css";
 // import "./assets/styles/main.css";
 

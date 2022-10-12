@@ -1,41 +1,43 @@
 <template>
   <div class="task-container">
-      <div class="task">
-        <div class="task-header" :style="changeColor">
-          <img 
-            @click="editMode = !editMode" 
-            src="../assets/icons/edit-icon.png" 
-            alt=""
-          >
-          <h4 v-if="editMode === false">{{ taskData.title }}</h4>
-          <input v-else class="input-editTitle" v-model="taskData.title" type="text" placeholder="New title">
-          <img 
-            @click="deleteTask" 
-            src="../assets/icons/close-icon.png" 
-            alt=""
-          >
-        </div>
-        <div class="task-body">
-          <p><strong>Description:</strong></p>
-          <p v-if="editMode === false">{{ taskData.description }}</p>
-          <input 
-            v-else class="input-editDesc" 
-            v-model="taskData.description" 
-            type="text" 
-            placeholder="New description"
-          >
-        </div>
-        <button 
-          v-if="editMode === false" 
-          class="btn" 
-          :style="changeColor" 
-          @click="completedTaskFn"
-        >Complete task</button>
-        <button 
-          v-else @click="saveEditedTask()" 
-          class="btn"
-        >Save changes</button>
+    <div class="task">
+      <div class="task-header" :style="changeColor">
+        <img
+          @click="editMode = !editMode"
+          src="../assets/icons/edit-icon.png"
+          alt=""
+        />
+        <h4 v-if="editMode === false">{{ taskData.title }}</h4>
+        <input
+          v-else
+          class="input-editTitle"
+          v-model="taskData.title"
+          type="text"
+          placeholder="New title"
+        />
+        <img @click="deleteTask" src="../assets/icons/close-icon.png" alt="" />
       </div>
+      <div class="task-body">
+        <p><strong>Description:</strong></p>
+        <p v-if="editMode === false">{{ taskData.description }}</p>
+        <input
+          v-else
+          class="input-editDesc"
+          v-model="taskData.description"
+          type="text"
+          placeholder="New description"
+        />
+      </div>
+      <button
+        v-if="editMode === false"
+        class="btn"
+        :style="changeColor"
+        @click="completedTaskFn"
+      >
+        Complete task
+      </button>
+      <button v-else @click="saveEditedTask()" class="btn">Save changes</button>
+    </div>
   </div>
 </template>
 
@@ -54,7 +56,7 @@ async function deleteTask() {
   myID = props.taskData.id;
   if (confirm(`Are you sure you want to delete task ID ${myID}?`)) {
     await taskStore.deleteSpecificTask(myID);
-    emit('fetchTasks');
+    emit("fetchTasks");
   }
 }
 
@@ -62,14 +64,16 @@ const completedTask = ref(false);
 
 const defaultBgColor = "background: #009DFF";
 const colorGreen = "background: #02DA47";
-const changeColor = computed(() => props.taskData.is_complete === false ? defaultBgColor : colorGreen);
+const changeColor = computed(() =>
+  props.taskData.is_complete === false ? defaultBgColor : colorGreen
+);
 
 const completedTaskFn = async () => {
   myID = props.taskData.id;
   completedTask.value = !completedTask.value;
   await taskStore.completeTask(myID, completedTask.value);
-  emit('fetchTasks');
-}
+  emit("fetchTasks");
+};
 
 /* --- EDIT MODE --- */
 const editMode = ref(false);
@@ -82,7 +86,7 @@ async function saveEditedTask() {
     props.taskData.title,
     props.taskData.description
   );
-  emit('fetchTasks');
+  emit("fetchTasks");
 }
 </script>
 
@@ -91,7 +95,6 @@ async function saveEditedTask() {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-
 }
 .task {
   position: relative;
@@ -104,7 +107,8 @@ async function saveEditedTask() {
 .task:hover {
   width: 270px;
   height: 220px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 .task-header {
   display: flex;
@@ -134,7 +138,7 @@ img:hover {
   font-size: 0.9rem;
 }
 .task-body p {
-  font-size: .8rem;
+  font-size: 0.8rem;
   margin: 10px;
 }
 
@@ -144,7 +148,7 @@ img:hover {
   margin: 70px auto 0 auto;
   padding: 4px 8px;
   color: white;
-  font-size: .8rem;
+  font-size: 0.8rem;
   cursor: pointer;
   position: absolute;
   left: 30%;
@@ -163,6 +167,12 @@ img:hover {
   width: 90%;
   padding: 0 6px;
   border-radius: 8px;
+}
+
+@media screen and (max-width: 480px) {
+  .task {
+    width: 30px;
+  }
 }
 </style>
 

@@ -14,9 +14,7 @@ import SplashScreen from "../components/SplashScreen.vue";
 import { defineAsyncComponent } from "vue";
 import HomePage from "../components/HomePage.vue";
 
-// Componente asincrono que se cargará cuando lo necesitemos
 const HomePageComponent = defineAsyncComponent(() => {
-  // Promesa para cargar un componente
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(import("../components/HomePage.vue"));

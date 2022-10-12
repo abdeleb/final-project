@@ -1,7 +1,8 @@
 <template>
   <header>
     <img src="../assets/logo.png" alt="logo" />
-    <p>Welcome back {{ currentUser }}</p>
+    <h1 class="title-text">Task Manager</h1>
+    <span class="welcome-text">Welcome back {{ currentUser }}!</span>
     <img
       class="logout"
       @click="signOut"
@@ -36,6 +37,7 @@ const signOut = async () => {
 
 <style scoped>
 header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,6 +60,20 @@ header img {
   height: 2.4rem;
 }
 
+.title-text {
+  position: absolute;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.2rem;
+  left: 55px;
+  color: white;
+}
+
+.welcome-text {
+  position: absolute;
+  font-size: 0.8rem;
+  color: white;
+  right: 45px;
+}
 .logout {
   width: 1.4rem;
   height: 1.4rem;
@@ -70,5 +86,15 @@ header img:hover {
 .logout:hover {
   width: 1.6rem;
   height: 1.6rem;
+}
+
+@media screen and (max-width: 499px) {
+  .title-text {
+    display: none;
+  }
+
+  .welcome-text {
+    display: none;
+  }
 }
 </style>

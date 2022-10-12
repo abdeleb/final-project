@@ -1,30 +1,50 @@
 <template>
   <main>
     <div class="ilustration-section">
-      <img src="../assets/signup-ilustration.svg" alt="">
+      <img src="../assets/signup-ilustration.svg" alt="" />
     </div>
     <div class="signup-section">
       <div class="form-container">
         <div class="title">Sign Up</div>
-        <p class="subtitle">Register to be able to enjoy all the benefits of our application!</p>
-        
+        <p class="subtitle">
+          Register to be able to enjoy all the benefits of our application!
+        </p>
         <form @submit.prevent="signUp">
           <div>
             <label>Email</label>
-            <input type="email" placeholder="example@email.com" v-model="email" id="email" />
+            <input
+              type="email"
+              placeholder="example@email.com"
+              v-model="email"
+              id="email"
+            />
           </div>
           <div>
             <label>Password</label>
-            <input type="password" placeholder="Enter password" v-model="password" id="password" />
+            <input
+              type="password"
+              placeholder="Enter password"
+              v-model="password"
+              id="password"
+            />
           </div>
           <div>
             <label>Confirm Password</label>
-            <input type="password" placeholder="Confirm password" v-model="confirmPassword" id="confirmPassword" />
+            <input
+              type="password"
+              placeholder="Confirm password"
+              v-model="confirmPassword"
+              id="confirmPassword"
+            />
           </div>
           <button class="btn" type="submit">Sign Up</button>
           <p>
             <span>Have an account? </span>
-            <PersonalRouter class="routeBtn" :route="route" :buttonText="buttonText" />
+            <PersonalRouter
+              class="routeBtn"
+              :route="route"
+              :buttonText="buttonText"
+            />
           </p>
         </form>
       </div>
@@ -37,6 +57,8 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import PersonalRouter from "./PersonalRouter.vue";
 import { useUserStore } from "../stores/user";
+import Swal from "sweetalert2";
+
 // Route Variables
 const route = "/auth/login";
 const buttonText = "Sign in";
@@ -56,19 +78,25 @@ async function signUp() {
     try {
       await useUserStore().signUp(email.value, password.value);
       // if (error) throw error;
-      redirect.push({ path: "/auth" });
+      redirect.push({ path: "/auth/login" });
     } catch (error) {
       errorMsg.value = error.message;
-      setTimeout(() => {
-        errorMsg.value = null;
-      }, 5000);
+      Swal.fire({
+        title: `${error.message}`,
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#009dff",
+        icon: "info",
+      });
     }
     return;
   }
   errorMsg.value = "Passwords do not match";
-  setTimeout(() => {
-    errorMsg.value = null;
-  }, 5000);
+  Swal.fire({
+    title: `${errorMsg.value}`,
+    confirmButtonText: "Ok",
+    confirmButtonColor: "#009dff",
+    icon: "info",
+  });
 }
 </script>
 
@@ -82,7 +110,7 @@ main {
 .ilustration-section {
   width: 50%;
   height: 100%;
-  background-color: #009DFF;
+  background-color: #009dff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,7 +131,7 @@ main {
 }
 .title {
   font-size: 2rem;
-  font-family: 'Open sans';
+  font-family: "Open sans";
   font-weight: 500;
   margin: 1.5rem 0;
 }
@@ -127,7 +155,7 @@ input {
 }
 
 .btn {
-  background-color: #009DFF;
+  background-color: #009dff;
   color: white;
   width: 100%;
   border-radius: 6px;
@@ -140,7 +168,7 @@ p span {
   color: rgb(113, 112, 112);
 }
 .routeBtn {
-  color: #009DFF;
+  color: #009dff;
   font-weight: 500;
 }
 @media screen and (max-width: 769px) {

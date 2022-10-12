@@ -18,7 +18,6 @@
               placeholder="example@email.com"
               v-model="email"
               id="email"
-              required
             />
           </div>
           <div>
@@ -30,7 +29,6 @@
                 placeholder="Enter password"
                 v-model="password"
                 id="password"
-                required
               />
               <span>
                 <!-- <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" /> -->
@@ -59,6 +57,7 @@ import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
+import Swal from "sweetalert2";
 
 // Route Variables
 const route = "/auth/sign-up";
@@ -67,6 +66,9 @@ const buttonText = "Sign Up";
 // Input Fields
 const email = ref("");
 const password = ref("");
+
+// Error Message
+const errorMsg = ref("");
 
 //Show hide password variables
 const passwordFieldType = computed(() =>
@@ -79,8 +81,28 @@ const redirect = useRouter();
 
 // Arrow function to Signin user to supaBase
 const signIn = async () => {
-  await useUserStore().signIn(email.value, password.value);
-  redirect.push({ path: "/" });
+  try {
+    if (email.value != "" && password.value != "") {
+      await useUserStore().signIn(email.value, password.value);
+      redirect.push({ path: "/" });
+    } else {
+      errorMsg.value = "Please, complete the form.";
+      Swal.fire({
+        title: `${errorMsg.value}`,
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#009dff",
+        icon: "info",
+      });
+    }
+  } catch (error) {
+    errorMsg.value = `Error: ${error.message}`;
+    Swal.fire({
+      title: `${error.message}`,
+      confirmButtonText: "Ok",
+      confirmButtonColor: "#009dff",
+      icon: "info",
+    });
+  }
 };
 </script>
 

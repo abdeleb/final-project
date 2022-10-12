@@ -3,12 +3,14 @@
     <img src="../assets/logo.png" alt="logo" />
     <h1 class="title-text">Task Manager</h1>
     <span class="welcome-text">Welcome back {{ currentUser }}!</span>
-    <img
-      class="logout"
-      @click="signOut"
-      src="../assets/icons/logout-icon.png"
-      alt="logout logo"
-    />
+    <a href="/">
+      <img
+        class="logout"
+        @click="signOut"
+        src="../assets/icons/logout-icon.png"
+        alt="logout logo"
+      />
+    </a>
   </header>
 </template>
 
@@ -16,21 +18,18 @@
 import { useRouter } from "vue-router";
 import { supabase } from "../supabase";
 import { useUserStore } from "../stores/user";
-//constant to save a variable that will hold the use router method
+
 const userStore = useUserStore();
 const currentUser = userStore.user.email.split("@")[0];
-// constant to save a variable that will get the user from store with a computed function imported from vue
-// constant that calls user email from the useUSerStore
-// constant that saves the user email and cleans out the @client from the user
-// async function that calls the signOut method from the useUserStore and pushes the user back to the Auth view.
+
 const signOut = async () => {
   try {
     let { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    // if (error) throw error;
   } catch (error) {
     alert(error.message);
   } finally {
-    router.push("/auth/login");
+    router.push("/auth/");
   }
 };
 </script>

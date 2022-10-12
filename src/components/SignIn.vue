@@ -10,9 +10,6 @@
         <p class="loginText">
           Log in with your data that you entered during your registration.
         </p>
-        <p v-if="errorMsg">
-          {{ errorMsg }}
-        </p>
         <form @submit.prevent="signIn">
           <div class="signin-form">
             <label for="">Email address</label>
@@ -21,6 +18,7 @@
               placeholder="example@email.com"
               v-model="email"
               id="email"
+              required
             />
           </div>
           <div>
@@ -32,6 +30,7 @@
                 placeholder="Enter password"
                 v-model="password"
                 id="password"
+                required
               />
               <span>
                 <!-- <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" /> -->
@@ -69,9 +68,6 @@ const buttonText = "Sign Up";
 const email = ref("");
 const password = ref("");
 
-// Error Message
-const errorMsg = ref("");
-
 //Show hide password variables
 const passwordFieldType = computed(() =>
   hidePassword.value ? "password" : "text"
@@ -83,22 +79,8 @@ const redirect = useRouter();
 
 // Arrow function to Signin user to supaBase
 const signIn = async () => {
-  try {
-    if (email.value != "" && password.value != "") {
-      await useUserStore().signIn(email.value, password.value);
-      redirect.push({ path: "/" });
-    } else {
-      errorMsg.value = "Please, complete the form.";
-      setTimeout(() => {
-        errorMsg.value = null;
-      }, 5000);
-    }
-  } catch (error) {
-    errorMsg.value = `Error: ${error.message}`;
-    setTimeout(() => {
-      errorMsg.value = null;
-    }, 5000);
-  }
+  await useUserStore().signIn(email.value, password.value);
+  redirect.push({ path: "/" });
 };
 </script>
 

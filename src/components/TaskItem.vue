@@ -72,8 +72,10 @@ const deleteTask = () => {
     title: "Are you sure you want to delete this task?",
     showCancelButton: true,
     cancelButtonText: "Cancel",
+    cancelButtonColor: "#FF8484",
     confirmButtonText: "Confirm",
-    icon: "warning",
+    confirmButtonColor: "#009dff",
+    icon: "question",
   }).then((result) => {
     if (result.isConfirmed) {
       asyncDeleteTask();

@@ -1,15 +1,23 @@
 <template>
   <header>
-    <img src="../assets/logo.png" alt="logo">
-    <img class="logout" @click="signOut" src="../assets/icons/logout-icon.png" alt="logout logo">
+    <img src="../assets/logo.png" alt="logo" />
+    <p>Welcome back {{ currentUser }}</p>
+    <img
+      class="logout"
+      @click="signOut"
+      src="../assets/icons/logout-icon.png"
+      alt="logout logo"
+    />
   </header>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
-import { supabase } from '../supabase';
+import { useRouter } from "vue-router";
+import { supabase } from "../supabase";
+import { useUserStore } from "../stores/user";
 //constant to save a variable that will hold the use router method
-const router = useRouter();
+const userStore = useUserStore();
+const currentUser = userStore.user.email.split("@")[0];
 // constant to save a variable that will get the user from store with a computed function imported from vue
 // constant that calls user email from the useUSerStore
 // constant that saves the user email and cleans out the @client from the user
@@ -32,8 +40,9 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-color: #009DFF;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: #009dff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 img {

@@ -114,7 +114,7 @@ main {
 .ilustration-section {
   width: 50%;
   height: 100%;
-  background-color: #009dff;
+  background-color: var(--bg-primary-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -181,7 +181,7 @@ input {
   width: 26px;
 }
 .btn {
-  background-color: #009dff;
+  background-color: var(--bg-primary-color);
   color: white;
   width: 100%;
   border-radius: 6px;

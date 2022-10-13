@@ -43,7 +43,7 @@ import Nav from "./Nav.vue";
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #009dff;
+  background: var(--bg-primary-color);
 }
 
 img {

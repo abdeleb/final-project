@@ -43,7 +43,7 @@ readFromStore();
 
 <style scoped>
 main {
-  background-color: white;
+  background-color: var(--bg-secondary-color);
   width: 100%;
 }
 
@@ -114,6 +114,9 @@ main {
 
   .header-container p {
     font-size: 0.6rem;
+  }
+  .header-container p {
+    display: none;
   }
 }
 </style>

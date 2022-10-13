@@ -1,34 +1,34 @@
 <template>
-<form>
-<div>
-  <label>Give the task a name!</label>
-  <input 
-    class="title-input" 
-    type="text" 
-    placeholder="Title"
-    v-model="taskTitle"  
-  >
-</div>
-<div>
-  <label>What are you thinking to do?</label>
-  <textarea 
-    class="description-input" 
-    placeholder="Description" 
-    rows="2"
-    v-model="taskDesc"    
-  ></textarea>
-</div>
-<p v-if="errorMsg" :style="'color: red'">
-  {{ errorMsg }}
-</p>
-<button @click.prevent="uploadTask">Add task</button>
-</form>
+  <form>
+    <div>
+      <label>Give the task a name!</label>
+      <input
+        class="title-input"
+        type="text"
+        placeholder="Title"
+        v-model="taskTitle"
+      />
+    </div>
+    <div>
+      <label>What are you thinking to do?</label>
+      <textarea
+        class="description-input"
+        placeholder="Description"
+        rows="2"
+        v-model="taskDesc"
+      ></textarea>
+    </div>
+    <p v-if="errorMsg" :style="'color: red'">
+      {{ errorMsg }}
+    </p>
+    <button @click.prevent="uploadTask">Add task</button>
+  </form>
 </template>
-  
+
 <script setup>
-import { ref } from 'vue';
-import { supabase } from '../supabase';
-import { useTaskStore } from '../stores/task';
+import { ref } from "vue";
+import { supabase } from "../supabase";
+import { useTaskStore } from "../stores/task";
 
 const emit = defineEmits(["fetchTasks"]);
 
@@ -52,14 +52,14 @@ function uploadTask() {
     sendToStore(taskTitle.value, taskDesc.value);
     taskTitle.value = "";
     taskDesc.value = "";
-    emit('fetchTasks');
+    emit("fetchTasks");
   }
-};
+}
 </script>
 
 <style scoped>
 form {
-  width: 60%;
+  width: 50%;
   margin: 24px 0;
   border-radius: 12px;
   padding: 30px;
@@ -68,7 +68,7 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--bg-secondary-color);
   font-weight: bold;
 }
 
@@ -82,18 +82,20 @@ form div label {
   margin-bottom: 12px;
 }
 
-input, textarea {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+input,
+textarea {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 6px;
   width: 100%;
-  background-color: white;
+  background-color: var(--bg-secondary-color);
 }
 
 button {
   margin-top: 12px;
   color: white;
   border-radius: 6px;
-  background-color: #009DFF;
+  background-color: var(--bg-primary-color);
   padding: 10px;
   width: 100%;
   cursor: pointer;
@@ -103,12 +105,24 @@ button:hover {
   background-color: #0288f6;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 1069px) {
   form {
-    width: 100%;
+    width: 70%;
   }
   div label {
-    font-size: .8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  form {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  form {
+    width: 90%;
   }
 }
 </style>

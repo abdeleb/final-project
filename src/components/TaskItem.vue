@@ -121,7 +121,7 @@ async function saveEditedTask() {
   border-radius: 0 0 8px 8px;
 }
 .task:hover {
-  width: 270px;
+  width: 360px;
   height: 220px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
@@ -160,18 +160,18 @@ img:hover {
 
 .btn {
   border-radius: 8px;
-  background-color: #009dff;
+  background-color: var(--bg-primary-color);
   margin: 70px auto 0 auto;
   padding: 4px 8px;
   color: white;
   font-size: 0.8rem;
   cursor: pointer;
   position: absolute;
-  left: 30%;
+  left: 35%;
   top: 45%;
 }
 .input-editTitle {
-  background-color: white;
+  background-color: var(--bg-secondary-color);
   width: 60%;
   padding: 0 6px;
   border-radius: 8px;
@@ -179,7 +179,7 @@ img:hover {
 .input-editDesc {
   background: #f2f2f2;
   margin: 12px;
-  width: 90%;
+  width: 92%;
   padding: 0 6px;
   border-radius: 8px;
 }

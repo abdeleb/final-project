@@ -6,7 +6,6 @@
     <div class="signin-section">
       <div class="form-container">
         <div class="title">Hello! Welcome back. 👋</div>
-        <!-- <PersonalRouter :route="route" :buttonText="buttonText" /> -->
         <p class="loginText">
           Log in with your data that you entered during your registration.
         </p>
@@ -20,8 +19,12 @@
               id="email"
             />
           </div>
-          <div>
-            <label for="">Password</label>
+          <div class="input-password-container">
+            <EyeIcon
+              class="eye-icon"
+              @click.prevent="hidePassword = !hidePassword"
+            />
+            <label>Password</label>
             <div>
               <input
                 :type="passwordFieldType"
@@ -30,9 +33,6 @@
                 v-model="password"
                 id="password"
               />
-              <span>
-                <!-- <EyeIcon :class="[passwordFieldIcon]" @click.prevent="hidePassword = !hidePassword" /> -->
-              </span>
             </div>
           </div>
           <button class="btn" type="submit">Start now!</button>
@@ -57,29 +57,26 @@ import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
+import EyeIcon from "./EyeIcon.vue";
 import Swal from "sweetalert2";
 
 // Route Variables
 const route = "/auth/sign-up";
 const buttonText = "Sign Up";
+const redirect = useRouter();
 
 // Input Fields
 const email = ref("");
 const password = ref("");
 
-// Error Message
 const errorMsg = ref("");
 
 //Show hide password variables
+const hidePassword = ref(true);
 const passwordFieldType = computed(() =>
   hidePassword.value ? "password" : "text"
 );
-const hidePassword = ref(true);
 
-// Router to push user once SignedIn to the HomeView
-const redirect = useRouter();
-
-// Arrow function to Signin user to supaBase
 const signIn = async () => {
   try {
     if (email.value != "" && password.value != "") {
@@ -170,7 +167,19 @@ input {
   color: rgb(219, 219, 219);
   opacity: 1;
 }
-
+.input-password-container {
+  position: relative;
+}
+.eye-icon {
+  position: absolute;
+  width: 24px;
+  right: 15px;
+  bottom: 15px;
+  cursor: pointer;
+}
+.eye-icon:hover {
+  width: 26px;
+}
 .btn {
   background-color: #009dff;
   color: white;

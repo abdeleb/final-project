@@ -114,7 +114,7 @@ async function saveEditedTask() {
 }
 .task {
   position: relative;
-  width: 250px;
+  width: 350px;
   height: 200px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   margin: 24px;
@@ -182,6 +182,11 @@ img:hover {
   width: 90%;
   padding: 0 6px;
   border-radius: 8px;
+}
+@media screen and (max-width: 449px) {
+  .task {
+    width: 300px;
+  }
 }
 </style>
 

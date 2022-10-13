@@ -6,13 +6,24 @@
         <img src="../assets/logo-app.png" alt="" />
         <h1>Welcome to Task Manager</h1>
         <h2>This tool will help you organize your tasks easily and simply.</h2>
-        <p>Add a new task here 👇</p>
         <NewTask @fetchTasks="readFromStore" />
+        <ButtonRounded
+          class="button-rounded"
+          @filterModeEvent="filterMode = !filterMode"
+        />
       </div>
     </div>
-    <div class="main-task">
+    <div v-if="!filterMode" class="main-task">
       <TaskItem
         v-for="(task, index) in taskArray"
+        :key="index"
+        :taskData="task"
+        @fetchTasks="readFromStore"
+      />
+    </div>
+    <div v-else class="main-task">
+      <TaskItem
+        v-for="(task, index) in doneTaskArray"
         :key="index"
         :taskData="task"
         @fetchTasks="readFromStore"
@@ -26,6 +37,7 @@
 import SplashScreen from "@/components/SplashScreen.vue";
 import Nav from "@/components/Nav.vue";
 import Footer from "@/components/Footer.vue";
+import ButtonRounded from "./ButtonRounded.vue";
 import NewTask from "@/components/NewTask.vue";
 import TaskItem from "@/components/TaskItem.vue";
 import { useTaskStore } from "@/stores/task.js";
@@ -34,9 +46,15 @@ import { ref } from "vue";
 const taskStore = useTaskStore();
 
 let taskArray = ref([]);
+let doneTaskArray = ref([]);
+
+let filterMode = ref(false);
 
 async function readFromStore() {
   taskArray.value = await taskStore.fetchTasks();
+  doneTaskArray.value = taskArray.value.filter(
+    (element) => element.is_complete === true
+  );
 }
 readFromStore();
 </script>
@@ -45,6 +63,7 @@ readFromStore();
 main {
   background-color: var(--bg-secondary-color);
   width: 100%;
+  position: relative;
 }
 
 .main-header {
@@ -78,10 +97,6 @@ main {
   font-weight: 300;
 }
 
-.header-container p {
-  margin-top: 18px;
-}
-
 .main-task {
   display: flex;
   flex-wrap: wrap;
@@ -97,10 +112,6 @@ main {
   .header-container h2 {
     font-size: 0.8rem;
   }
-
-  .header-container p {
-    font-size: 0.8rem;
-  }
 }
 
 @media screen and (max-width: 460px) {
@@ -111,13 +122,9 @@ main {
   .header-container h2 {
     font-size: 0.6rem;
   }
-
-  .header-container p {
-    font-size: 0.6rem;
-  }
-  .header-container p {
-    display: none;
-  }
+}
+.button-rounded {
+  margin-bottom: 20px;
 }
 </style>
 

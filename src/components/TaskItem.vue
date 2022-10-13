@@ -53,14 +53,6 @@ const taskStore = useTaskStore();
 
 let myID = props.taskData.id;
 
-// async function deleteTask() {
-//   myID = props.taskData.id;
-//   if (confirm(`Are you sure you want to delete task ID ${myID}?`)) {
-//     await taskStore.deleteSpecificTask(myID);
-//     emit("fetchTasks");
-//   }
-// }
-
 const asyncDeleteTask = async () => {
   myID = props.taskData.id;
   await taskStore.deleteSpecificTask(myID);

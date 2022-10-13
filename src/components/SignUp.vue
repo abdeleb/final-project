@@ -62,17 +62,14 @@ import Swal from "sweetalert2";
 // Route Variables
 const route = "/auth/login";
 const buttonText = "Sign in";
+const redirect = useRouter();
+
 // Input Fields
 const email = ref(null);
 const password = ref(null);
 const confirmPassword = ref(null);
 const errorMsg = ref(null);
-// Error Message
-// Show hide password variable
-// Show hide confrimPassword variable
-// Router to push user once SignedUp to Log In
-const redirect = useRouter();
-// function to SignUp user to supaBase with a timeOut() method for showing the error
+
 async function signUp() {
   if (password.value === confirmPassword.value) {
     try {
